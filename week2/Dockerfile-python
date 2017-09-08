@@ -1,0 +1,12 @@
+# source https://github.com/mingfang/docker-geekbench
+FROM ubuntu:16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y \
+    python \
+    python-setuptools \
+    python-pip
+
+
+# add additional installation commands here using standard shell code

@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="September 11, 2017" />
+  <title>BBD Seminar Week 2: Overview of tools and resources on campus and beyond: Savio, Box/bDrive, XSEDE, cloud resources</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">BBD Seminar Week 2: Overview of tools and resources on campus and beyond: Savio, Box/bDrive, XSEDE, cloud resources</h1>
+<h2 class="author">September 11, 2017</h2>
+<h3 class="date">Chris Paciorek and Deb McCaffrey (BRC)</h3>
+</div>
+<h1 id="introduction">Introduction</h1>
+<p>The goal this week is to familiarize you with various resources and tools for computation and data storage available for researchers on campus and at the national level.</p>
+<p>Two key take-home messages:</p>
+<ul>
+<li>if you feel like you're scaling back the questions you can answer because of computational limits, talk to us about larger-scale resources that may be available</li>
+<li>consultants with Berkeley Research Computing and Research Data Management are here to help (XSEDE also has extensive consulting support)</li>
+</ul>
+<p>The materials for this session are available using git at <a href="https://github.com/ucberkeley/bbd-seminar-fall-2017" class="uri">https://github.com/ucberkeley/bbd-seminar-fall-2017</a> or simply as a <a href="https://github.com/ucberkeley/bbd-seminar-fall-2017/archive/master.zip">zip file</a>. The HTML is also on bCourses.</p>
+<h1 id="outline">Outline</h1>
+<p>This training session will cover the following topics:</p>
+<ul>
+<li>Overview of resources
+<ul>
+<li>Data storage</li>
+<li>Data transfer</li>
+<li>Computation</li>
+</ul></li>
+<li>Cloud-based virtual machines (VMs)
+<ul>
+<li>Google cloud platform example</li>
+<li>AWS services</li>
+</ul></li>
+<li>XSEDE (NSF's national computing infrastructure)
+<ul>
+<li>Overview</li>
+<li>What is possible on XSEDE</li>
+<li>Key XSEDE resources and what they're good for</li>
+<li>Example usage of Jetstream (starting up a VM)</li>
+<li>Getting an account</li>
+</ul></li>
+<li>Containerization and portable computation
+<ul>
+<li>Overview of containers</li>
+<li>Docker</li>
+<li>Singularity<br />
+</li>
+</ul></li>
+<li>Where to get more help</li>
+</ul>
+<h1 id="data-storage-for-large-datasets">Data storage for large datasets</h1>
+<ul>
+<li>Box and Google Drive (i.e., bDrive) provide unlimited file storage</li>
+<li>Savio scratch drive provides extensive short-term storage</li>
+<li><a href="http://research-it.berkeley.edu/services/high-performance-computing/brc-condo-storage-service-savio">Savio condo storage service</a> provides inexpensive long-term storage</li>
+<li>AWS and other cloud services have paid offerings</li>
+</ul>
+<h1 id="data-storage-and-computation-for-confidential-data">Data storage and computation for confidential data</h1>
+<ul>
+<li>UC Berkeley IST can set up secure virtual machines (VMs)</li>
+<li>no vetted solution using commercial cloud providers yet</li>
+<li>ongoing discussions about providing for secure data on Savio</li>
+<li>BRC has a Windows-based virtual machine service, AEoD, that may be able to address secure data issue</li>
+</ul>
+<p>Research Data Management can help you explore options.</p>
+<h1 id="data-transfer-globus">Data transfer: Globus</h1>
+<p>You can use Globus Connect to transfer data data to/from Savio (and between other resources) quickly and unattended. This is a better choice for large transfers. Here are some <a href="http://research-it.berkeley.edu/services/high-performance-computing/using-globus-connect-savio">instructions</a>.</p>
+<p>Globus transfers data between <em>endpoints</em>. Possible endpoints include: Savio, your laptop or desktop, NERSC, and XSEDE, among others.</p>
+<p>Savio's endpoint is named <code>ucb#brc</code>.</p>
+<p>If you are transferring to/from your laptop, you'll need 1) Globus Connect Personal set up, 2) your machine established as an endpoint and 3) Globus Connect Pesonal actively running on your machine. At that point you can proceed as below.</p>
+<p>To transfer files, you open Globus at <a href="https://globus.org">globus.org</a> and authenticate to the endpoints you want to transfer between. You can then start a transfer and it will proceed in the background, including restarting if interrupted.</p>
+<p>Globus also provides a <a href="https://docs.globus.org/cli/using-the-cli">command line interface</a> that will allow you to do transfers programmatically, such that a transfer could be embedded in a workflow script.</p>
+<h1 id="data-transfer-box">Data transfer: Box</h1>
+<p>Box provides <strong>unlimited</strong>, free, secured, and encrypted content storage of files with a maximum file size of 15 Gb to Berkeley affiliates. So it's a good option for backup and long-term storage.</p>
+<p>You can move files between Box and your laptop using the Box Sync app. And you can interact with Box via a web browser at <a href="http://box.berkeley.edu" class="uri">http://box.berkeley.edu</a>.</p>
+<p>The best way to move files between Box and Savio is <a href="http://research-it.berkeley.edu/services/high-performance-computing/transferring-data-between-savio-and-your-uc-berkeley-box-account">via lftp as discussed here</a>. This allows you to programmatically transfer data from the command line.</p>
+<p>Similar functionality may be possible to transfer data between Box and XSED or Box and cloud-based services.</p>
+<p>BRC is working (long-term) on making Globus available for transfer to/from Box, but it's not available yet.</p>
+<h1 id="data-transfer-bdrive-google-drive">Data transfer: bDrive (Google Drive)</h1>
+<p>bDrive provides <strong>unlimited</strong>, free, secured, and encrypted content storage of files with a maximum file size of 5 Tb to Berkeley affiliates.</p>
+<p>You can move files to and from your laptop using the Google Drive app.</p>
+<p>You can move files between bDrive and Savio <a href="http://research-it.berkeley.edu/services/high-performance-computing/transferring-data-between-savio-and-your-bdrive-google-drive">via the Google Drive app as discussed here</a>.</p>
+<h1 id="cloud-computing-overview">Cloud computing overview</h1>
+<p>Various cloud providers (AWS, Google Compute Platform, Microsoft Azure) provide a wide variety of resources and tools through the cloud.</p>
+<ul>
+<li>virtual machines</li>
+<li>virtual clusters for distributed computing</li>
+<li>deep learning platforms</li>
+<li>Spark/Hadoop big data platforms</li>
+<li>services for running SQL queries on big datasets</li>
+<li>cloud storage</li>
+</ul>
+<p>Note that Savio and XSEDE provide many of these for free.</p>
+<p>Berkeley Research Computing consultants can discuss options with you.</p>
+<h1 id="google-cloud-platform-overview">Google cloud platform overview</h1>
+<p>We'll walk through how one sets up a virtual machine (VM) through Google in seminar.</p>
+<p>You can sign up for a free trial with $300 in credits for the next year at cloud.google.com. As far as I can tell you can actually do this under more than one google account, and you can decide whether to do with an <span class="citation">@gmail.com</span> account or an <span class="citation">@berkeley.edu</span> bConnected account. You'll need to give a credit card but won't have to pay anything unless you explicitly ok it at some later time.</p>
+<p>You'll need to create a new project before you can do anything.</p>
+<p>Once you sign on and have a project, you'll be at the Console from which you can control your various interactions. E.g., you could start up VMs, control who has access to your account and projects, start up big data services, etc.</p>
+<h1 id="google-cloud-platform-vm-demo">Google cloud platform VM demo</h1>
+<ul>
+<li>https://cloud.google.com</li>
+<li>console</li>
+<li>create a project and open it</li>
+<li>compute engine -&gt; VM instances</li>
+<li>(note REST and gcloud commandline startup notes at bottom)</li>
+<li>SSH (3 options)
+<ul>
+<li>ssh in browser</li>
+<li>gcloud compute --project &quot;bbd-demo&quot; ssh --zone &quot;us-west1-a&quot; &quot;instance-1&quot; (but do &quot;gcloud auth login&quot; first)</li>
+<li>set up ssh key pair and use usual ssh</li>
+</ul></li>
+<li>install software</li>
+<li>run computations</li>
+</ul>
+<h1 id="xsede-resources-overview">XSEDE resources overview</h1>
+<p>Some core resources we tend to refer researchers to:</p>
+<ul>
+<li>Bridges
+<ul>
+<li>traditional HPC</li>
+<li>Hadoop/Spark</li>
+<li>large memory (up to 12 TB/node)</li>
+<li>GPU nodes</li>
+<li>web server nodes</li>
+</ul></li>
+<li>Comet
+<ul>
+<li>less traditional HPC</li>
+<li>Singularity</li>
+<li>GPU nodes</li>
+<li>Science Gateways -Jetstream</li>
+<li>VM-based cloud resource</li>
+<li>long running jobs/servers</li>
+<li><em>possibly</em> can be used for secure data/compute</li>
+</ul></li>
+</ul>
+<p>Some additional resources:</p>
+<ul>
+<li>Stampede2
+<ul>
+<li>Intel Many Integrated Core architecture machine</li>
+<li>KNL nodes with SKX to come</li>
+</ul></li>
+<li>XStreme
+<ul>
+<li>GPU only machine</li>
+</ul></li>
+<li>Wrangler
+<ul>
+<li>data storage machine</li>
+<li>persistent databases</li>
+<li>Hadoop</li>
+</ul></li>
+</ul>
+<h1 id="xsede-startup-allocation-example">XSEDE startup allocation example</h1>
+<p>See Google doc.</p>
+<p>Thanks to Chris Kennedy for sharing this.</p>
+<h1 id="overview-of-containers">Overview of containers</h1>
+<p>Containers are like lightweight virtual machines. A virtual machine is a disposable computer that runs on your actual computer or somebody else's computer.</p>
+<p>You have control over the operating system (what variant of Linux) and what gets installed in the container.</p>
+<p>Containers are built off of 'images' that hold the software installed on the image. A 'container' or an 'instance' is the running version of that image. You can run multiple containers based on the same image.</p>
+<p>You can use other people's images or create your own image, often building off an existing image.</p>
+<h1 id="docker">Docker</h1>
+<p>You can use Docker to run other people's existing &quot;images&quot; (i.e., virtual machines).</p>
+<p>Here we might run a basic Ubuntu 16.04 Linux container or a Linux container with a bunch of R-related things installed.</p>
+<pre><code>docker run -it ubuntu:16.04 /bin/bash
+docker run -it ubuntu:16.04 cat /proc/cpuinfo
+docker run -it rocker/r-base /bin/bash
+docker run -it rocker/r-base Rscript -e &quot;library(ggplot2)&quot;</code></pre>
+<p><code>docker run</code> runs a container based on the image selected - it's like choosing a computer with particular software and then starting it up to use it.</p>
+<p>You can run the Docker container either interactively or executing a particular script in the background to carry out your computational job.</p>
+<p>Or if you need to install particular software, you can create a Docker image that you set up so it has the software you need installed on it. You can choose whatever Linux variant you are comfortable with and/or it's easy to install the software on.</p>
+<p>You do this by creating a <code>Dockerfile</code> (or modifying somebody else's). Here's a very basic Dockerfile that would install Python.</p>
+<pre><code># source https://github.com/mingfang/docker-geekbench
+FROM ubuntu:16.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update &amp;&amp; apt-get install -y \
+    python \
+    python-setuptools \
+    python-pip
+
+
+# add additional installation commands here using standard shell code</code></pre>
+<p>See also <code>Dockerfile-R</code> to see how one could create an image with R and related software on it.</p>
+<p>You can run a Docker container on your own machine (including Windows, Mac), Google cloud platform, AWS EC2, XSEDE Jetstream.</p>
+<h1 id="singularity">Singularity</h1>
+<p>You can't run Docker on most clusters (e.g., Savio, most XSEDE resources) because Docker requires administrative (root) privileges.</p>
+<p>Some resources (Savio, XSEDE's Comet) allow you to run Singularity containers, which are similar to Docker containers but don't have root access and therefore are more acceptable to cluster administrators.</p>
+<p>You can easily convert your Docker container to a Singularity container.</p>
+<p>( Side note, here's what the command looks like:</p>
+<pre><code>docker run  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/image:/output  --privileged -t --rm  singularityware/docker2singularity name_of_docker_image</code></pre>
+<p>)</p>
+<p>Then just run it on the cluster of interest and you won't have to worry about how to install software on that cluster; the software is already installed in your container.</p>
+<h1 id="upcoming-events">Upcoming events</h1>
+<ul>
+<li>September 15 and every two weeks thereafter: <a href="http://research-it.berkeley.edu/services/cloud-computing-support/cloud-working-group">Cloud working group</a> sessions on various topics in using the cloud.</li>
+<li>September 19: Introduction to Savio training: largely duplicates the Sep. 18 BBD seminar, but with more detail. Register here: https://goo.gl/forms/eAn1BeO1fFdbKeZE2</li>
+</ul>
+<h1 id="how-to-get-additional-help">How to get additional help</h1>
+<ul>
+<li>For questions about computing resources in general, including cloud computing and XSEDE:
+<ul>
+<li>brc@berkeley.edu</li>
+</ul></li>
+<li>For questions about data management (including HIPAA-protected data):
+<ul>
+<li>researchdata@berkeley.edu</li>
+</ul></li>
+<li>Or email me (paciorek@berkeley.edu) directly -- part of my role with the seminar and BBD grant is to provide computing support.</li>
+</ul>
+</body>
+</html>
