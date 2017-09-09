@@ -8,23 +8,23 @@ The goal this week is to familiarize you with various resources and tools for co
 
 Two key take-home messages:
 
- - if you feel like you're scaling back the questions you can answer because of computational limits, talk to us about larger-scale resources that may be available
- - consultants with Berkeley Research Computing and Research Data Management are here to help (XSEDE also has extensive consulting support)
+ - If you feel like you're scaling back the questions you can answer because of computational limits, talk to us about larger-scale resources that may be available.
+ - Consultants with Berkeley Research Computing and Research Data Management are here to help (XSEDE also has extensive consulting support); see end of this document for contact info.
 
 
 The materials for this session are available using git at [https://github.com/ucberkeley/bbd-seminar-fall-2017](https://github.com/ucberkeley/bbd-seminar-fall-2017) or simply as a [zip file](https://github.com/ucberkeley/bbd-seminar-fall-2017/archive/master.zip). The HTML is also on bCourses.
 
 # Outline
 
-This training session will cover the following topics:
+This presentation will cover the following topics:
 
  - Overview of resources
      - Data storage
      - Data transfer
      - Computation
  - Cloud-based virtual machines (VMs)
+     - Overview
      - Google cloud platform example
-     - AWS services
  - XSEDE (NSF's national computing infrastructure)
      - Overview
      - What is possible on XSEDE
@@ -62,7 +62,7 @@ Globus transfers data between *endpoints*. Possible endpoints include: Savio, yo
 
 Savio's endpoint is named `ucb#brc`.
 
-If you are transferring to/from your laptop, you'll need 1) Globus Connect Personal set up, 2) your machine established as an endpoint and 3) Globus Connect Pesonal actively running on your machine. At that point you can proceed as below.
+If you are transferring to/from your laptop, you'll need 1) Globus Connect Personal set up, 2) your machine established as an endpoint and 3) Globus Connect Personal actively running on your machine. At that point you can proceed as below.
 
 To transfer files, you open Globus at [globus.org](https://globus.org) and authenticate to the endpoints you want to transfer between. You can then start a transfer and it will proceed in the background, including restarting if interrupted. 
 
@@ -73,11 +73,11 @@ Globus also provides a [command line interface](https://docs.globus.org/cli/usin
 
 Box provides **unlimited**, free, secured, and encrypted content storage of files with a maximum file size of 15 Gb to Berkeley affiliates. So it's a good option for backup and long-term storage. 
 
-You can move files between Box and your laptop using the Box Sync app. And you can interact with Box via a web browser at [http://box.berkeley.edu](http://box.berkeley.edu).
+You can move files between Box and your laptop using the Box Sync app. And you can interact with Box via a web browser at [https://box.berkeley.edu](https://box.berkeley.edu).
 
 The best way to move files between Box and Savio is [via lftp as discussed here](http://research-it.berkeley.edu/services/high-performance-computing/transferring-data-between-savio-and-your-uc-berkeley-box-account). This allows you to programmatically transfer data from the command line. 
 
-Similar functionality may be possible to transfer data between Box and XSED or Box and cloud-based services.
+Similar functionality may be possible to transfer data between Box and XSEDE or Box and cloud-based services.
 
 BRC is working (long-term) on making Globus available for transfer to/from Box, but it's not available yet.
 
@@ -124,7 +124,7 @@ Once you sign on and have a project, you'll be at the Console from which you can
  - SSH (3 options)
     - ssh in browser
     - gcloud compute --project "bbd-demo" ssh --zone "us-west1-a" "instance-1" (but do "gcloud auth login" first)
-    - set up ssh key pair and use usual ssh
+    - set up SSH key pair and use usual SSH
  - install software
  - run computations
 
@@ -143,7 +143,7 @@ Some core resources we tend to refer researchers to:
     - Singularity
     - GPU nodes
     - Science Gateways
--Jetstream
+- Jetstream
     - VM-based cloud resource
     - long running jobs/servers
     - *possibly* can be used for secure data/compute
@@ -153,7 +153,7 @@ Some additional resources:
 - Stampede2
     - Intel Many Integrated Core architecture machine
     - KNL nodes with SKX to come
-- XStreme
+- XStream
     - GPU only machine
 - Wrangler
     - data storage machine
@@ -175,7 +175,9 @@ You have control over the operating system (what variant of Linux) and  what get
 
 Containers are built off of 'images' that hold the software installed on the image. A 'container' or an 'instance' is the running version of that image. You can run multiple containers based on the same image.
 
-You can use other people's images or create your own image, often building off an existing image. 
+You can use other people's images or create your own image, often building off an existing image.
+
+Here's some [more introduction](https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b) if you're interested.
 
 # Docker
 
@@ -190,13 +192,15 @@ docker run -it rocker/r-base /bin/bash
 docker run -it rocker/r-base Rscript -e "library(ggplot2)"
 ```
 
-`docker run` runs a container based on the image selected - it's like choosing a computer with particular software and then starting it up to use it.
+"docker run" runs a container based on the image selected - it's like choosing a computer with particular software and then starting it up to use it.
 
  You can run the Docker container either interactively or executing a particular script in the background to carry out your computational job.
 
+# Docker - creating your own image
+
 Or if you need to install particular software, you can create a Docker image that you set up so it has the software you need installed on it. You can choose whatever Linux variant you are comfortable with and/or it's easy to install the software on.
 
-You do this by creating a `Dockerfile` (or modifying somebody else's). Here's a very basic Dockerfile that would install Python.
+You do this by creating a `Dockerfile` (or modifying somebody else's). Here's a very basic Dockerfile that would install Python on top of an Ubuntu Linux base image.
 
 ```
 # source https://github.com/mingfang/docker-geekbench
@@ -225,19 +229,20 @@ Some resources (Savio, XSEDE's Comet) allow you to run Singularity containers, w
 
 You can easily convert your Docker container to a Singularity container.
 
-(
-Side note, here's what the command looks like:
+Side note -- here's what the command looks like:
 ```
-docker run  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/image:/output  --privileged -t --rm  singularityware/docker2singularity name_of_docker_image
+docker run  -v /var/run/docker.sock:/var/run/docker.sock \
+-v /tmp/image:/output  --privileged -t --rm  \
+singularityware/docker2singularity name_of_docker_image
 ```
-)
 
-Then just run it on the cluster of interest and you won't have to worry about how to install software on that cluster; the software is already installed in your container.
+
+Then just run the Singularity container on the cluster of interest and you won't have to worry about how to install software on that cluster; the software is already installed in your container.
 
 # Upcoming events
 
- - September 15 and every two weeks thereafter: [Cloud working group](http://research-it.berkeley.edu/services/cloud-computing-support/cloud-working-group) sessions on various topics in using the cloud.
- - September 19: Introduction to Savio training: largely duplicates the Sep. 18 BBD seminar, but with more detail. Register here: https://goo.gl/forms/eAn1BeO1fFdbKeZE2 
+ - September 15 and every two weeks thereafter: [Cloud working group](http://research-it.berkeley.edu/services/cloud-computing-support/cloud-working-group) sessions on various topics in using the cloud (sponsored by D-Lab and BRC).
+ - September 19: Introduction to Savio training: largely duplicates the Sep. 18 BBD seminar, but with more detail. Register here: [https://goo.gl/forms/eAn1BeO1fFdbKeZE2](https://goo.gl/forms/eAn1BeO1fFdbKeZE2)
 
 # How to get additional help
 

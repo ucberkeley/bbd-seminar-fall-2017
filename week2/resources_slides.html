@@ -27,14 +27,14 @@ September 11, 2017
 <p>The goal this week is to familiarize you with various resources and tools for computation and data storage available for researchers on campus and at the national level.</p>
 <p>Two key take-home messages:</p>
 <ul>
-<li>if you feel like you're scaling back the questions you can answer because of computational limits, talk to us about larger-scale resources that may be available</li>
-<li>consultants with Berkeley Research Computing and Research Data Management are here to help (XSEDE also has extensive consulting support)</li>
+<li>If you feel like you're scaling back the questions you can answer because of computational limits, talk to us about larger-scale resources that may be available.</li>
+<li>Consultants with Berkeley Research Computing and Research Data Management are here to help (XSEDE also has extensive consulting support); see end of this document for contact info.</li>
 </ul>
 <p>The materials for this session are available using git at <a href="https://github.com/ucberkeley/bbd-seminar-fall-2017" class="uri">https://github.com/ucberkeley/bbd-seminar-fall-2017</a> or simply as a <a href="https://github.com/ucberkeley/bbd-seminar-fall-2017/archive/master.zip">zip file</a>. The HTML is also on bCourses.</p>
 </div>
 <div id="outline" class="slide section level1">
 <h1>Outline</h1>
-<p>This training session will cover the following topics:</p>
+<p>This presentation will cover the following topics:</p>
 <ul>
 <li>Overview of resources
 <ul>
@@ -44,8 +44,8 @@ September 11, 2017
 </ul></li>
 <li>Cloud-based virtual machines (VMs)
 <ul>
+<li>Overview</li>
 <li>Google cloud platform example</li>
-<li>AWS services</li>
 </ul></li>
 <li>XSEDE (NSF's national computing infrastructure)
 <ul>
@@ -89,16 +89,16 @@ September 11, 2017
 <p>You can use Globus Connect to transfer data data to/from Savio (and between other resources) quickly and unattended. This is a better choice for large transfers. Here are some <a href="http://research-it.berkeley.edu/services/high-performance-computing/using-globus-connect-savio">instructions</a>.</p>
 <p>Globus transfers data between <em>endpoints</em>. Possible endpoints include: Savio, your laptop or desktop, NERSC, and XSEDE, among others.</p>
 <p>Savio's endpoint is named <code>ucb#brc</code>.</p>
-<p>If you are transferring to/from your laptop, you'll need 1) Globus Connect Personal set up, 2) your machine established as an endpoint and 3) Globus Connect Pesonal actively running on your machine. At that point you can proceed as below.</p>
+<p>If you are transferring to/from your laptop, you'll need 1) Globus Connect Personal set up, 2) your machine established as an endpoint and 3) Globus Connect Personal actively running on your machine. At that point you can proceed as below.</p>
 <p>To transfer files, you open Globus at <a href="https://globus.org">globus.org</a> and authenticate to the endpoints you want to transfer between. You can then start a transfer and it will proceed in the background, including restarting if interrupted.</p>
 <p>Globus also provides a <a href="https://docs.globus.org/cli/using-the-cli">command line interface</a> that will allow you to do transfers programmatically, such that a transfer could be embedded in a workflow script.</p>
 </div>
 <div id="data-transfer-box" class="slide section level1">
 <h1>Data transfer: Box</h1>
 <p>Box provides <strong>unlimited</strong>, free, secured, and encrypted content storage of files with a maximum file size of 15 Gb to Berkeley affiliates. So it's a good option for backup and long-term storage.</p>
-<p>You can move files between Box and your laptop using the Box Sync app. And you can interact with Box via a web browser at <a href="http://box.berkeley.edu" class="uri">http://box.berkeley.edu</a>.</p>
+<p>You can move files between Box and your laptop using the Box Sync app. And you can interact with Box via a web browser at <a href="https://box.berkeley.edu" class="uri">https://box.berkeley.edu</a>.</p>
 <p>The best way to move files between Box and Savio is <a href="http://research-it.berkeley.edu/services/high-performance-computing/transferring-data-between-savio-and-your-uc-berkeley-box-account">via lftp as discussed here</a>. This allows you to programmatically transfer data from the command line.</p>
-<p>Similar functionality may be possible to transfer data between Box and XSED or Box and cloud-based services.</p>
+<p>Similar functionality may be possible to transfer data between Box and XSEDE or Box and cloud-based services.</p>
 <p>BRC is working (long-term) on making Globus available for transfer to/from Box, but it's not available yet.</p>
 </div>
 <div id="data-transfer-bdrive-google-drive" class="slide section level1">
@@ -140,7 +140,7 @@ September 11, 2017
 <ul>
 <li>ssh in browser</li>
 <li>gcloud compute --project &quot;bbd-demo&quot; ssh --zone &quot;us-west1-a&quot; &quot;instance-1&quot; (but do &quot;gcloud auth login&quot; first)</li>
-<li>set up ssh key pair and use usual ssh</li>
+<li>set up SSH key pair and use usual SSH</li>
 </ul></li>
 <li>install software</li>
 <li>run computations</li>
@@ -163,7 +163,10 @@ September 11, 2017
 <li>less traditional HPC</li>
 <li>Singularity</li>
 <li>GPU nodes</li>
-<li>Science Gateways -Jetstream</li>
+<li>Science Gateways</li>
+</ul></li>
+<li>Jetstream
+<ul>
 <li>VM-based cloud resource</li>
 <li>long running jobs/servers</li>
 <li><em>possibly</em> can be used for secure data/compute</li>
@@ -176,7 +179,7 @@ September 11, 2017
 <li>Intel Many Integrated Core architecture machine</li>
 <li>KNL nodes with SKX to come</li>
 </ul></li>
-<li>XStreme
+<li>XStream
 <ul>
 <li>GPU only machine</li>
 </ul></li>
@@ -199,6 +202,7 @@ September 11, 2017
 <p>You have control over the operating system (what variant of Linux) and what gets installed in the container.</p>
 <p>Containers are built off of 'images' that hold the software installed on the image. A 'container' or an 'instance' is the running version of that image. You can run multiple containers based on the same image.</p>
 <p>You can use other people's images or create your own image, often building off an existing image.</p>
+<p>Here's some <a href="https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b">more introduction</a> if you're interested.</p>
 </div>
 <div id="docker" class="slide section level1">
 <h1>Docker</h1>
@@ -208,10 +212,13 @@ September 11, 2017
 docker run -it ubuntu:16.04 cat /proc/cpuinfo
 docker run -it rocker/r-base /bin/bash
 docker run -it rocker/r-base Rscript -e &quot;library(ggplot2)&quot;</code></pre>
-<p><code>docker run</code> runs a container based on the image selected - it's like choosing a computer with particular software and then starting it up to use it.</p>
+<p>&quot;docker run&quot; runs a container based on the image selected - it's like choosing a computer with particular software and then starting it up to use it.</p>
 <p>You can run the Docker container either interactively or executing a particular script in the background to carry out your computational job.</p>
+</div>
+<div id="docker---creating-your-own-image" class="slide section level1">
+<h1>Docker - creating your own image</h1>
 <p>Or if you need to install particular software, you can create a Docker image that you set up so it has the software you need installed on it. You can choose whatever Linux variant you are comfortable with and/or it's easy to install the software on.</p>
-<p>You do this by creating a <code>Dockerfile</code> (or modifying somebody else's). Here's a very basic Dockerfile that would install Python.</p>
+<p>You do this by creating a <code>Dockerfile</code> (or modifying somebody else's). Here's a very basic Dockerfile that would install Python on top of an Ubuntu Linux base image.</p>
 <pre><code># source https://github.com/mingfang/docker-geekbench
 FROM ubuntu:16.04
 
@@ -232,16 +239,17 @@ RUN apt-get update &amp;&amp; apt-get install -y \
 <p>You can't run Docker on most clusters (e.g., Savio, most XSEDE resources) because Docker requires administrative (root) privileges.</p>
 <p>Some resources (Savio, XSEDE's Comet) allow you to run Singularity containers, which are similar to Docker containers but don't have root access and therefore are more acceptable to cluster administrators.</p>
 <p>You can easily convert your Docker container to a Singularity container.</p>
-<p>( Side note, here's what the command looks like:</p>
-<pre><code>docker run  -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/image:/output  --privileged -t --rm  singularityware/docker2singularity name_of_docker_image</code></pre>
-<p>)</p>
-<p>Then just run it on the cluster of interest and you won't have to worry about how to install software on that cluster; the software is already installed in your container.</p>
+<p>Side note -- here's what the command looks like:</p>
+<pre><code>docker run  -v /var/run/docker.sock:/var/run/docker.sock \
+-v /tmp/image:/output  --privileged -t --rm  \
+singularityware/docker2singularity name_of_docker_image</code></pre>
+<p>Then just run the Singularity container on the cluster of interest and you won't have to worry about how to install software on that cluster; the software is already installed in your container.</p>
 </div>
 <div id="upcoming-events" class="slide section level1">
 <h1>Upcoming events</h1>
 <ul>
-<li>September 15 and every two weeks thereafter: <a href="http://research-it.berkeley.edu/services/cloud-computing-support/cloud-working-group">Cloud working group</a> sessions on various topics in using the cloud.</li>
-<li>September 19: Introduction to Savio training: largely duplicates the Sep. 18 BBD seminar, but with more detail. Register here: https://goo.gl/forms/eAn1BeO1fFdbKeZE2</li>
+<li>September 15 and every two weeks thereafter: <a href="http://research-it.berkeley.edu/services/cloud-computing-support/cloud-working-group">Cloud working group</a> sessions on various topics in using the cloud (sponsored by D-Lab and BRC).</li>
+<li>September 19: Introduction to Savio training: largely duplicates the Sep. 18 BBD seminar, but with more detail. Register here: <a href="https://goo.gl/forms/eAn1BeO1fFdbKeZE2" class="uri">https://goo.gl/forms/eAn1BeO1fFdbKeZE2</a></li>
 </ul>
 </div>
 <div id="how-to-get-additional-help" class="slide section level1">
