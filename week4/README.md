@@ -8,5 +8,5 @@ This material is essentially an R-focused subset of the material in two tutorial
 
 Those two materials are generally kept up-to-date, so may be a better long-term reference.
 
-
+Finally, Nima has prepared some materials on the `future` package. Here are [some slides](https://www.stat.berkeley.edu/~nhejazi/present/2017_futuRe_intro/2017_futuRe_intro.html#1) and here is a [Github repo](https://github.com/nhejazi/talk_futuRe-intro).
 
