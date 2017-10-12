@@ -1,0 +1,4 @@
+default:
+  sparklyr.shell.driver-memory: 8G
+  sparklyr.shell.executor-memory: 32G
+  
